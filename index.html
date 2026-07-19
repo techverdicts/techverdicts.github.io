@@ -127,7 +127,6 @@
             margin-top: 5px;
             margin-bottom: 20px;
             padding: 0;
-            scroll-margin-top: 60px; /* Gives nice breathing room when nav scrolls up here */
         }
 
         .main-discussion-title {
@@ -163,7 +162,6 @@
             border-left: 4px solid var(--accent);
             padding-left: 10px;
             font-weight: 700;
-            scroll-margin-top: 50px;
         }
 
         /* HARD-FIXED 3-COLUMN MATRIX GRID */
@@ -192,6 +190,7 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             height: 100%;
             position: relative;
+            scroll-margin-top: 50px; /* Precise landing offset when targeted by navbar buttons */
         }
 
         @media (min-width: 600px) {
@@ -471,7 +470,7 @@
             margin: 35px 0 15px;
             color: var(--primary);
             font-weight: 700;
-            scroll-margin-top: 60px; /* Precise snapping point for See All 10 */
+            scroll-margin-top: 60px;
         }
 
         /* Accordion for Ranks 4-10 */
@@ -566,14 +565,14 @@
 <body>
 
     <!-- FIXED INLINE HEADER -->
-    <header id="page-top">
+    <header>
         <div class="header-container">
             <h1>TechVerdicts</h1>
             <p>Independent, data-driven security software reviews by industry experts.</p>
         </div>
     </header>
 
-    <!-- FIXED NAV BUTTONS -->
+    <!-- FIXED NAV BUTTONS (DYNAMIK SCROLL TARGETS FIXED) -->
     <nav class="jump-nav">
         <a class="jump-btn" onclick="openViaNav('nord-panel', 'card-nord', 'active-nord')">🛡️ Best Overall</a>
         <a class="jump-btn" onclick="openViaNav('proton-panel', 'card-proton', 'active-proton')">👁️ Max Privacy</a>
@@ -594,9 +593,9 @@
             <strong>Security Alert:</strong> Unprotected internet activity is visible to your ISP and network snoops. If you are looking for the fastest protection to secure streaming, downloads, or block malicious hidden tracking scripts, lock down your connection with an audited VPN provider below.
         </div>
 
-        <h2 class="verdict-title" id="verdict-section-title">Editor's Choice: Top 3 Recommendations</h2>
+        <h2 class="verdict-title">Editor's Choice: Top 3 Recommendations</h2>
         
-        <!-- 3-COLUMN PERMANENT GRID LAYOUT -->
+        <!-- MUKTAMAD 3-COLUMN PERMANENT GRID LAYOUT -->
         <div class="verdict-grid">
             
             <!-- Block #1: NordVPN -->
@@ -840,13 +839,13 @@
             });
         });
 
-        // 100% RELIABLE PURE GRID SWITCH ENGINE
+        // 100% NATURAL GRID LAYOUT CONTROLLER
         function toggleUnifiedReview(panelId, cardId, activeClass) {
             const panel = document.getElementById(panelId);
             const card = document.getElementById(cardId);
             const isCurrentlyOpen = panel.classList.contains('open-panel');
             
-            // Clean Slate: Close all panels & reset card highlight classes
+            // Clean Slate: Close all panels & remove active morph classes
             document.querySelectorAll('.inline-review-panel').forEach(p => {
                 p.className = 'inline-review-panel'; 
             });
@@ -866,18 +865,19 @@
             document.getElementById(cardId).classList.remove('active-review-card');
         }
 
-        // PERBAIKAN NAVIGASI ATAS: Buka panel review DAN bawa skrin naik atas dengan lembut
+        // FIXED JUMP NAV: DYNAMIC SCROLL ENGINE (Tepat fokus pada produk masing-masing)
         function openViaNav(panelId, cardId, activeClass) {
+            // 1. Jalankan logik buka tab ulasan terlebih dahulu
             toggleUnifiedReview(panelId, cardId, activeClass);
             
-            // Bawa skrin meluncur naik lembut ke bahagian tajuk Top 3 Recommendations
-            document.getElementById('verdict-section-title').scrollIntoView({ 
+            // 2. Skrol lembut skrin fokus TEPAT pada kad produk yang ditekan
+            document.getElementById(cardId).scrollIntoView({ 
                 behavior: 'smooth', 
                 block: 'start' 
             });
         }
 
-        // Fungsi khas skrol untuk pautan "See All 10"
+        // Dedicated helper function for the "See All 10" button
         function scrollToElement(id) {
             document.getElementById(id).scrollIntoView({ 
                 behavior: 'smooth', 

@@ -175,7 +175,7 @@
         @media (min-width: 600px) {
             .verdict-grid {
                 grid-template-columns: repeat(3, 1fr);
-                row-gap: 15px; /* Menjaga jarak baris grid desktop tetap stabil */
+                row-gap: 15px;
             }
         }
 
@@ -206,17 +206,20 @@
             background: #fffaf0;
         }
 
-        /* SOLUSI PC BORDER FIX: Kad aktif melapis panel secara natural tanpa ganggu kad lain */
+        /* UNIFIED ACTIVE CARD STYLING */
+        .verdict-card.active-review-card {
+            border: 2px solid var(--secondary) !important;
+            border-bottom-left-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+            border-bottom: none !important; /* Hilangkan garisan sempadan bawah kad */
+            z-index: 10;
+            background: white;
+            box-shadow: none;
+        }
+
         @media (min-width: 600px) {
             .verdict-card.active-review-card {
-                border: 2px solid var(--secondary) !important;
-                border-bottom-left-radius: 0 !important;
-                border-bottom-right-radius: 0 !important;
-                border-bottom: 2px solid white !important; /* Tutup garisan bawah kad */
-                height: calc(100% + 17px); /* Memanjang ke bawah melepasi ruang gap grid */
-                z-index: 10;
-                background: white;
-                box-shadow: none;
+                height: calc(100% + 17px); /* Memanjang ke bawah khusus untuk desktop gap */
             }
         }
 
@@ -307,32 +310,27 @@
             display: block;
         }
 
-        /* Mobile Flow Physics */
+        /* MOBILE FIX FIXED: Sempadan bercantum suci bersih tanpa ralat garis melintang */
         @media (max-width: 599px) {
             .inline-review-panel.open-panel {
                 border-top-left-radius: 0;
                 border-top-right-radius: 0;
-                margin-top: -17px;
+                margin-top: -17px; /* Tarik naik rapat menutup gap mobile grid */
+                border-top: none !important; /* MUKTAMAD: Matikan border atas untuk versi mobile */
                 margin-bottom: 15px;
-            }
-            .verdict-card.active-review-card {
-                border: 2px solid var(--secondary) !important;
-                border-bottom-left-radius: 0 !important;
-                border-bottom-right-radius: 0 !important;
-                border-bottom: none !important;
             }
         }
 
-        /* Desktop Mode Layout Column Spanning & Stable Fit */
+        /* Desktop Mode Layout Column Spanning */
         @media (min-width: 600px) {
             .inline-review-panel.open-panel {
                 grid-column: 1 / -1;
                 grid-row: 2;
-                margin-top: 0px; /* Panel kekal statik di baris asal */
+                margin-top: -17px;
+                border-top: none !important;
                 z-index: 1;
             }
 
-            /* Blueprint corner attachments */
             .inline-review-panel.active-nord { border-top-left-radius: 0 !important; border-top-right-radius: 12px !important; }
             .inline-review-panel.active-proton { border-top-left-radius: 12px !important; border-top-right-radius: 12px !important; }
             .inline-review-panel.active-pure { border-top-right-radius: 0 !important; border-top-left-radius: 12px !important; }
@@ -607,7 +605,7 @@
 
         <h2 class="verdict-title">Editor's Choice: Top 3 Recommendations</h2>
         
-        <!-- 3-COLUMN PERMANENT GRID LAYOUT -->
+        <!-- MATRIX GRID LAYOUT -->
         <div class="verdict-grid">
             
             <!-- Block #1: NordVPN -->
@@ -851,13 +849,13 @@
             });
         });
 
-        // 100% PERFECT HIGH-FIDELITY ENGINE
+        // 100% PURE SEAMLESS GRID SYSTEM
         function toggleUnifiedReview(panelId, cardId, activeClass) {
             const panel = document.getElementById(panelId);
             const card = document.getElementById(cardId);
             const isCurrentlyOpen = panel.classList.contains('open-panel');
             
-            // Clean Slate: Tutup semua panel & buang kesan aktif pada border kad
+            // Clean Slate: Tutup semua panel & remove highlight classes
             document.querySelectorAll('.inline-review-panel').forEach(p => {
                 p.className = 'inline-review-panel'; 
             });
@@ -865,7 +863,7 @@
                 c.classList.remove('active-review-card');
             });
             
-            // Buka hanya jika tab tu asalnya tertutup
+            // Buka secara eksklusif jika tertutup
             if (!isCurrentlyOpen) {
                 panel.classList.add('open-panel', activeClass); 
                 card.classList.add('active-review-card'); 
@@ -886,7 +884,6 @@
             });
         }
 
-        // Dedicated helper function for the "See All 10" button
         function scrollToElement(id) {
             document.getElementById(id).scrollIntoView({ 
                 behavior: 'smooth', 

@@ -106,6 +106,7 @@
             font-weight: 700;
             transition: all 0.2s ease;
             white-space: nowrap;
+            cursor: pointer;
         }
 
         .jump-btn:hover {
@@ -163,7 +164,7 @@
             font-weight: 700;
         }
 
-        /* MUKTAMAD: STABLE CSS GRID SYSTEM (PC & MOBILE SHIFT PROOF) */
+        /* STABLE CSS GRID SYSTEM */
         .verdict-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -177,9 +178,8 @@
             }
         }
 
-        /* Wrapper functions as a sub-grid controller inside desktop layout */
         .verdict-wrapper {
-            display: contents; /* Allows grid items to align with parent grid directly */
+            display: contents;
         }
 
         .verdict-card {
@@ -198,7 +198,7 @@
 
         @media (min-width: 600px) {
             .verdict-card {
-                grid-row: 1; /* Force top 3 elements strictly in the same first row */
+                grid-row: 1;
             }
         }
 
@@ -207,13 +207,13 @@
             background: #fffaf0;
         }
 
-        /* Unified active layout morph matching blueprint requirements */
+        /* Unified active layout morph */
         .verdict-wrapper.open-review .verdict-card {
             border: 2px solid var(--secondary) !important;
             border-bottom-left-radius: 0 !important;
             border-bottom-right-radius: 0 !important;
             border-bottom: 2px solid white !important;
-            margin-bottom: -17px; /* Pull down panel to overlap border flawlessly */
+            margin-bottom: -17px;
             z-index: 10;
             background: white;
             box-shadow: none;
@@ -290,7 +290,7 @@
             color: var(--primary);
         }
 
-        /* TRUE UNIFIED REVIEW HOUSING (100% SECURE NATURAL FLOW LAYOUT) */
+        /* UNIFIED REVIEW HOUSING */
         .inline-review-panel {
             background: white;
             border: 2px solid var(--border);
@@ -317,15 +317,14 @@
             }
         }
 
-        /* Desktop Mode: Forces layout grid column bridging cleanly below the matrices */
+        /* Desktop Mode Layout Column Spanning */
         @media (min-width: 600px) {
             .verdict-wrapper.open-review .inline-review-panel {
-                grid-column: 1 / -1; /* Spans across all 3 column spaces naturally */
-                grid-row: 2;         /* Positions right below the top cards cluster */
+                grid-column: 1 / -1;
+                grid-row: 2;
                 margin-top: 2px;
             }
 
-            /* Custom blueprint header attachments for pure flat-flush matching styles */
             #wrapper-nord.open-review .inline-review-panel { border-top-left-radius: 0; }
             #wrapper-proton.open-review .inline-review-panel { border-top-left-radius: 12px; border-top-right-radius: 12px; }
             #wrapper-pure.open-review .inline-review-panel { border-top-right-radius: 0; }
@@ -576,9 +575,9 @@
         </div>
     </header>
 
-    <!-- FIXED NAV -->
+    <!-- FIXED NAV BUTTONS (CORRECTED ONCLICK TRIGGERS) -->
     <nav class="jump-nav">
-        <a href="#main-matrix" class="jump-btn">🛡️ Best Overall</a>
+        <a href="#main-matrix" class="jump-btn" onclick="openDirectlyViaNav('wrapper-nord')">🛡️ Best Overall</a>
         <a href="#main-matrix" class="jump-btn" onclick="openDirectlyViaNav('wrapper-proton')">👁️ Max Privacy</a>
         <a href="#main-matrix" class="jump-btn" onclick="openDirectlyViaNav('wrapper-pure')">💰 Best Value</a>
         <a href="#more-vpns" class="jump-btn">📂 See All 10</a>
@@ -599,7 +598,7 @@
 
         <h2 class="verdict-title">Editor's Choice: Top 3 Recommendations</h2>
         
-        <!-- NATURALLY UNIFIED MATRIX GRID LAYOUT -->
+        <!-- UNIFIED MATRIX GRID LAYOUT -->
         <div class="verdict-grid">
             
             <!-- Block #1: NordVPN -->
@@ -616,7 +615,7 @@
                         <button class="btn-review-trigger" onclick="toggleUnifiedReview('wrapper-nord')">Read Deep-Dive Review</button>
                     </div>
                 </div>
-                <!-- Inline Panel (Physically bound to wrapper) -->
+                <!-- Inline Panel -->
                 <div class="inline-review-panel">
                     <div class="vpn-header">
                         <div class="vpn-name-area">
@@ -637,7 +636,7 @@
                             <ul>
                                 <li>Lightning-fast connection speeds</li>
                                 <li>Built-in automatic ad & malware script protection</li>
-                                <li>Consistently bypasses heavy network blocks</li>
+                                <li>Conslessly bypasses heavy network blocks</li>
                             </ul>
                         </div>
                         <div class="pc-box cons">
@@ -665,7 +664,7 @@
                         <button class="btn-review-trigger" onclick="toggleUnifiedReview('wrapper-proton')">Read Deep-Dive Review</button>
                     </div>
                 </div>
-                <!-- Inline Panel (Physically bound to wrapper) -->
+                <!-- Inline Panel -->
                 <div class="inline-review-panel">
                     <div class="vpn-header">
                         <div class="vpn-name-area">
@@ -714,7 +713,7 @@
                         <button class="btn-review-trigger" onclick="toggleUnifiedReview('wrapper-pure')">Read Deep-Dive Review</button>
                     </div>
                 </div>
-                <!-- Inline Panel (Physically bound to wrapper) -->
+                <!-- Inline Panel -->
                 <div class="inline-review-panel">
                     <div class="vpn-header">
                         <div class="vpn-name-area">
@@ -846,17 +845,17 @@
             });
         });
 
-        // 100% PURE HTML FLOW LAYOUT ENGINE (ANTI-JUMP & ZERO bertindih)
+        // 100% NATURAL GRID LAYOUT CONTROLLER (BEBAS JUMP)
         function toggleUnifiedReview(wrapperId) {
             const targetWrapper = document.getElementById(wrapperId);
             const isCurrentlyOpen = targetWrapper.classList.contains('open-review');
             
-            // Wipe slate clean: close all panels naturally
+            // Tutup semua panel ulasan lain secara natural
             document.querySelectorAll('.verdict-wrapper').forEach(w => {
                 w.classList.remove('open-review');
             });
             
-            // Open exclusively without absolute positioning tricks or scrolls
+            // Buka panel ulasan yang dipilih
             if (!isCurrentlyOpen) {
                 targetWrapper.classList.add('open-review');
             }
@@ -866,6 +865,7 @@
             document.getElementById(wrapperId).classList.remove('open-review');
         }
 
+        // Fungsi pembetulan navigasi atas (Hantar ID wrapper yang tepat)
         function openDirectlyViaNav(wrapperId) {
             toggleUnifiedReview(wrapperId);
         }

@@ -175,6 +175,7 @@
         @media (min-width: 600px) {
             .verdict-grid {
                 grid-template-columns: repeat(3, 1fr);
+                row-gap: 15px; /* Menjaga jarak baris grid desktop tetap stabil */
             }
         }
 
@@ -191,6 +192,7 @@
             height: 100%;
             position: relative;
             scroll-margin-top: 50px;
+            transition: border-color 0.2s;
         }
 
         @media (min-width: 600px) {
@@ -204,22 +206,17 @@
             background: #fffaf0;
         }
 
-        /* UNIFIED ACTIVE LAYOUT MORPH (PC FIXED BORDER) */
-        .verdict-card.active-review-card {
-            border: 2px solid var(--secondary) !important;
-            border-bottom-left-radius: 0 !important;
-            border-bottom-right-radius: 0 !important;
-            border-bottom: none !important; /* Buang terus border bawah */
-            margin-bottom: -17px;
-            z-index: 10;
-            background: white;
-            box-shadow: none;
-        }
-
-        /* Mobile specific shift padding correction */
-        @media (max-width: 599px) {
+        /* SOLUSI PC BORDER FIX: Kad aktif melapis panel secara natural tanpa ganggu kad lain */
+        @media (min-width: 600px) {
             .verdict-card.active-review-card {
-                margin-bottom: 0px; 
+                border: 2px solid var(--secondary) !important;
+                border-bottom-left-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
+                border-bottom: 2px solid white !important; /* Tutup garisan bawah kad */
+                height: calc(100% + 17px); /* Memanjang ke bawah melepasi ruang gap grid */
+                z-index: 10;
+                background: white;
+                box-shadow: none;
             }
         }
 
@@ -310,7 +307,7 @@
             display: block;
         }
 
-        /* Mobile Flow Physics - Snap cleanly underneath cards */
+        /* Mobile Flow Physics */
         @media (max-width: 599px) {
             .inline-review-panel.open-panel {
                 border-top-left-radius: 0;
@@ -318,19 +315,24 @@
                 margin-top: -17px;
                 margin-bottom: 15px;
             }
+            .verdict-card.active-review-card {
+                border: 2px solid var(--secondary) !important;
+                border-bottom-left-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
+                border-bottom: none !important;
+            }
         }
 
-        /* Desktop Mode Layout Column Spanning & Anti-Gap Fitting */
+        /* Desktop Mode Layout Column Spanning & Stable Fit */
         @media (min-width: 600px) {
             .inline-review-panel.open-panel {
                 grid-column: 1 / -1;
                 grid-row: 2;
-                margin-top: -17px; /* Tarik panel naik ke atas untuk lupuskan gap desktop grid */
-                border-top: none;  /* Matikan border melintang atas */
+                margin-top: 0px; /* Panel kekal statik di baris asal */
                 z-index: 1;
             }
 
-            /* Precise architectural border-radius syncing on PC */
+            /* Blueprint corner attachments */
             .inline-review-panel.active-nord { border-top-left-radius: 0 !important; border-top-right-radius: 12px !important; }
             .inline-review-panel.active-proton { border-top-left-radius: 12px !important; border-top-right-radius: 12px !important; }
             .inline-review-panel.active-pure { border-top-right-radius: 0 !important; border-top-left-radius: 12px !important; }
@@ -849,13 +851,13 @@
             });
         });
 
-        // 100% RELIABLE PURE GRID SWITCH ENGINE
+        // 100% PERFECT HIGH-FIDELITY ENGINE
         function toggleUnifiedReview(panelId, cardId, activeClass) {
             const panel = document.getElementById(panelId);
             const card = document.getElementById(cardId);
             const isCurrentlyOpen = panel.classList.contains('open-panel');
             
-            // Clean Slate: Tutup semua panel & remove active morph classes
+            // Clean Slate: Tutup semua panel & buang kesan aktif pada border kad
             document.querySelectorAll('.inline-review-panel').forEach(p => {
                 p.className = 'inline-review-panel'; 
             });
@@ -863,7 +865,7 @@
                 c.classList.remove('active-review-card');
             });
             
-            // Open exclusively if closed
+            // Buka hanya jika tab tu asalnya tertutup
             if (!isCurrentlyOpen) {
                 panel.classList.add('open-panel', activeClass); 
                 card.classList.add('active-review-card'); 
@@ -875,12 +877,9 @@
             document.getElementById(cardId).classList.remove('active-review-card');
         }
 
-        // FIXED JUMP NAV: DYNAMIC SCROLL ENGINE (Fokus tepat pada produk masing-masing)
+        // FIXED JUMP NAV: DYNAMIC SCROLL ENGINE
         function openViaNav(panelId, cardId, activeClass) {
-            // 1. Jalankan logik buka tab ulasan terlebih dahulu
             toggleUnifiedReview(panelId, cardId, activeClass);
-            
-            // 2. Skrol lembut skrin fokus TEPAT pada kad produk yang ditekan
             document.getElementById(cardId).scrollIntoView({ 
                 behavior: 'smooth', 
                 block: 'start' 

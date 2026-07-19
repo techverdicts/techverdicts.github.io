@@ -206,7 +206,92 @@
             background: #fffaf0;
         }
 
-        /* TRUE UNIFIED REVIEW HOUSING BASE */
+        /* SOLUSI PC BORDER FIX: Kekal statik melapis jernih */
+        @media (min-width: 600px) {
+            .verdict-card.active-review-card {
+                border: 2px solid var(--secondary) !important;
+                border-bottom-left-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
+                border-bottom: 2px solid white !important; 
+                height: calc(100% + 17px); 
+                z-index: 10;
+                background: white;
+                box-shadow: none;
+            }
+        }
+
+        .badge {
+            background: var(--accent);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 20px;
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 12;
+        }
+
+        .card-rank {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .card-name {
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .card-verdict {
+            font-size: 0.8rem;
+            color: #4b5563;
+            margin-bottom: 15px;
+            min-height: 40px;
+        }
+
+        .btn-cta {
+            background: var(--success);
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(22, 163, 74, 0.2);
+        }
+
+        .btn-cta:hover {
+            background-color: #15803d;
+        }
+
+        .btn-review-trigger {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-review-trigger:hover {
+            background: #e2e8f0;
+            color: var(--primary);
+        }
+
+        /* TRUE UNIFIED REVIEW HOUSING */
         .inline-review-panel {
             background: white;
             border: 2px solid var(--secondary);
@@ -223,60 +308,35 @@
         }
 
         /* ========================================================
-           STRICT MOBILE STYLING (max-width: 599px)
+           FIXED: REKA BENTUK MOBILE KHAS (max-width: 599px)
            ======================================================== */
         @media (max-width: 599px) {
             .verdict-card.active-review-card {
                 border: 2px solid var(--secondary) !important;
                 border-bottom-left-radius: 0 !important;
                 border-bottom-right-radius: 0 !important;
-                border-bottom: none !important;
-                box-shadow: none;
+                border-bottom: none !important; /* Buang border bawah kad */
             }
 
             .inline-review-panel.open-panel {
                 border-top-left-radius: 0 !important;
                 border-top-right-radius: 0 !important;
-                margin-top: -17px; 
-                border-top: none !important; 
+                margin-top: -17px; /* Squeeze rapat menutup gap mobile grid */
+                border-top: none !important; /* FIX MUKTAMAD MOBILE: Padam garis biru melintang atas panel review */
                 margin-bottom: 15px;
             }
         }
 
-        /* ========================================================
-           STRICT DESKTOP PC STYLING (min-width: 600px)
-           ======================================================== */
+        /* Desktop Mode Layout Column Spanning & Stable Fit */
         @media (min-width: 600px) {
-            /* 🚀 PATCH HEADER PC: Besarkan tulisan & paksa sebaris tengah tegak */
-            .header-container {
-                align-items: center !important;
-            }
-            header h1 {
-                font-size: 1.6rem !important; /* Besarkan nama landing page */
-            }
-            header p {
-                font-size: 0.95rem !important; /* Besarkan description */
-                margin-top: 2px; /* Kemaskan mikro-posisi horizontal */
-            }
-
-            .verdict-card.active-review-card {
-                border: 2px solid var(--secondary) !important;
-                border-bottom-left-radius: 0 !important;
-                border-bottom-right-radius: 0 !important;
-                border-bottom: 2px solid white !important; 
-                height: calc(100% + 17px) !important; 
-                z-index: 10;
-                background: white;
-                box-shadow: none;
-            }
-
             .inline-review-panel.open-panel {
                 grid-column: 1 / -1;
                 grid-row: 2;
-                margin-top: -17px; 
+                margin-top: 0px; 
                 z-index: 1;
             }
 
+            /* Blueprint corner attachments PC */
             .inline-review-panel.active-nord { border-top-left-radius: 0 !important; border-top-right-radius: 12px !important; }
             .inline-review-panel.active-proton { border-top-left-radius: 12px !important; border-top-right-radius: 12px !important; }
             .inline-review-panel.active-pure { border-top-right-radius: 0 !important; border-top-left-radius: 12px !important; }
@@ -551,7 +611,7 @@
 
         <h2 class="verdict-title">Editor's Choice: Top 3 Recommendations</h2>
         
-        <!-- MATRIX GRID LAYOUT -->
+        <!-- 3-COLUMN PERMANENT GRID LAYOUT -->
         <div class="verdict-grid">
             
             <!-- Block #1: NordVPN -->

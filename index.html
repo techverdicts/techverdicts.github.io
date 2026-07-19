@@ -190,7 +190,7 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             height: 100%;
             position: relative;
-            scroll-margin-top: 50px; /* Precise landing offset when targeted by navbar buttons */
+            scroll-margin-top: 50px;
         }
 
         @media (min-width: 600px) {
@@ -204,16 +204,23 @@
             background: #fffaf0;
         }
 
-        /* Unified active layout morph styles */
+        /* UNIFIED ACTIVE LAYOUT MORPH (PC FIXED BORDER) */
         .verdict-card.active-review-card {
             border: 2px solid var(--secondary) !important;
             border-bottom-left-radius: 0 !important;
             border-bottom-right-radius: 0 !important;
-            border-bottom: 2px solid white !important;
+            border-bottom: none !important; /* Buang terus border bawah */
             margin-bottom: -17px;
             z-index: 10;
             background: white;
             box-shadow: none;
+        }
+
+        /* Mobile specific shift padding correction */
+        @media (max-width: 599px) {
+            .verdict-card.active-review-card {
+                margin-bottom: 0px; 
+            }
         }
 
         .badge {
@@ -303,7 +310,7 @@
             display: block;
         }
 
-        /* Mobile Flow Physics */
+        /* Mobile Flow Physics - Snap cleanly underneath cards */
         @media (max-width: 599px) {
             .inline-review-panel.open-panel {
                 border-top-left-radius: 0;
@@ -313,17 +320,20 @@
             }
         }
 
-        /* Desktop Mode Layout Column Spanning */
+        /* Desktop Mode Layout Column Spanning & Anti-Gap Fitting */
         @media (min-width: 600px) {
             .inline-review-panel.open-panel {
                 grid-column: 1 / -1;
                 grid-row: 2;
-                margin-top: 2px;
+                margin-top: -17px; /* Tarik panel naik ke atas untuk lupuskan gap desktop grid */
+                border-top: none;  /* Matikan border melintang atas */
+                z-index: 1;
             }
 
-            .inline-review-panel.active-nord { border-top-left-radius: 0; }
-            .inline-review-panel.active-proton { border-top-left-radius: 12px; border-top-right-radius: 12px; }
-            .inline-review-panel.active-pure { border-top-right-radius: 0; }
+            /* Precise architectural border-radius syncing on PC */
+            .inline-review-panel.active-nord { border-top-left-radius: 0 !important; border-top-right-radius: 12px !important; }
+            .inline-review-panel.active-proton { border-top-left-radius: 12px !important; border-top-right-radius: 12px !important; }
+            .inline-review-panel.active-pure { border-top-right-radius: 0 !important; border-top-left-radius: 12px !important; }
         }
 
         .vpn-header {
@@ -572,7 +582,7 @@
         </div>
     </header>
 
-    <!-- FIXED NAV BUTTONS (DYNAMIK SCROLL TARGETS FIXED) -->
+    <!-- FIXED NAV BUTTONS -->
     <nav class="jump-nav">
         <a class="jump-btn" onclick="openViaNav('nord-panel', 'card-nord', 'active-nord')">🛡️ Best Overall</a>
         <a class="jump-btn" onclick="openViaNav('proton-panel', 'card-proton', 'active-proton')">👁️ Max Privacy</a>
@@ -595,7 +605,7 @@
 
         <h2 class="verdict-title">Editor's Choice: Top 3 Recommendations</h2>
         
-        <!-- MUKTAMAD 3-COLUMN PERMANENT GRID LAYOUT -->
+        <!-- 3-COLUMN PERMANENT GRID LAYOUT -->
         <div class="verdict-grid">
             
             <!-- Block #1: NordVPN -->
@@ -839,13 +849,13 @@
             });
         });
 
-        // 100% NATURAL GRID LAYOUT CONTROLLER
+        // 100% RELIABLE PURE GRID SWITCH ENGINE
         function toggleUnifiedReview(panelId, cardId, activeClass) {
             const panel = document.getElementById(panelId);
             const card = document.getElementById(cardId);
             const isCurrentlyOpen = panel.classList.contains('open-panel');
             
-            // Clean Slate: Close all panels & remove active morph classes
+            // Clean Slate: Tutup semua panel & remove active morph classes
             document.querySelectorAll('.inline-review-panel').forEach(p => {
                 p.className = 'inline-review-panel'; 
             });
@@ -865,7 +875,7 @@
             document.getElementById(cardId).classList.remove('active-review-card');
         }
 
-        // FIXED JUMP NAV: DYNAMIC SCROLL ENGINE (Tepat fokus pada produk masing-masing)
+        // FIXED JUMP NAV: DYNAMIC SCROLL ENGINE (Fokus tepat pada produk masing-masing)
         function openViaNav(panelId, cardId, activeClass) {
             // 1. Jalankan logik buka tab ulasan terlebih dahulu
             toggleUnifiedReview(panelId, cardId, activeClass);

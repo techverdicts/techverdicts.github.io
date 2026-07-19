@@ -28,24 +28,78 @@
             line-height: 1.6;
         }
 
+        /* 1. HEADER 2 COLUMN OPTIMIZATION */
         header {
             background-color: var(--primary);
             color: white;
-            padding: 25px 15px;
-            text-align: center;
+            padding: 15px 20px;
             border-bottom: 4px solid var(--accent);
         }
 
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
         header h1 {
-            font-size: 2rem;
-            margin-bottom: 5px;
+            font-size: 1.4rem;
             font-weight: 800;
             letter-spacing: -0.5px;
+            white-space: nowrap;
         }
 
         header p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            text-align: right;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            header p {
+                text-align: left;
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* 2. MAIN DISCUSSION HEADLINE AREA */
+        .main-discussion-area {
+            text-align: left;
+            margin-bottom: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        /* TUKAR AYAT H1 INI SAHAJA UNTUK 6 LANDING PAGE MENGIKUT TRAFIK KAU */
+        .main-discussion-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.3;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .main-discussion-desc {
             font-size: 0.95rem;
-            opacity: 0.9;
+            color: #4b5563;
         }
 
         /* Navigation Sticky Jump Links */
@@ -80,12 +134,6 @@
             border-color: var(--secondary);
         }
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-
         /* Popunder-optimized warning banner */
         .warning-banner {
             background: #fffbeb;
@@ -112,7 +160,7 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 15px;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
         }
 
         @media (min-width: 600px) {
@@ -177,6 +225,7 @@
             font-size: 0.8rem;
             color: #4b5563;
             margin-bottom: 15px;
+            min-height: 40px;
         }
 
         .btn-cta {
@@ -190,28 +239,45 @@
             display: block;
             transition: background-color 0.2s;
             box-shadow: 0 2px 4px rgba(22, 163, 74, 0.2);
+            margin-bottom: 10px;
         }
 
         .btn-cta:hover {
             background-color: #15803d;
         }
 
-        /* Full Reviews Section */
-        .section-title {
-            font-size: 1.4rem;
-            margin: 35px 0 15px;
-            color: var(--primary);
+        /* 3. NEW REVIEW TRIGGER BUTTON STYLE */
+        .btn-review-trigger {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
             font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .btn-review-trigger:hover {
+            background: #e2e8f0;
+            color: var(--primary);
+        }
+
+        /* 4. DYNAMIC DEEP-DIVE REVIEWS CONTAINER (HIDDEN BY DEFAULT) */
+        .deep-dive-container {
+            margin-bottom: 35px;
         }
 
         .vpn-item {
             background: white;
-            border: 1px solid var(--border);
+            border: 2px solid var(--secondary);
             border-radius: 12px;
             padding: 20px;
-            margin-bottom: 25px;
-            scroll-margin-top: 80px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-top: 10px;
+            box-shadow: 0 10px 15px -3px rgba(30, 64, 175, 0.1);
+            display: none; /* Controlled via JS */
         }
 
         .vpn-header {
@@ -338,6 +404,35 @@
             background-color: #15803d;
         }
 
+        /* NEW CLOSE BUTTON INSIDE REVIEW PANELS */
+        .btn-close-review {
+            background: #64748b;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 15px;
+            transition: background 0.2s;
+        }
+
+        .btn-close-review:hover {
+            background: #475569;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 1.4rem;
+            margin: 35px 0 15px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
         /* Accordion for Lower 7 Reviews */
         .accordion-container {
             margin-top: 15px;
@@ -395,12 +490,34 @@
             border-top: 1px solid var(--border);
         }
 
+        /* 5. BOOKMARK CTA BANNER */
+        .bookmark-cta {
+            background: linear-gradient(135deg, #1e3a8a, #0f172a);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 40px 0 20px 0;
+            border: 1px solid #2563eb;
+        }
+
+        .bookmark-cta p {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .bookmark-cta span {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
         footer {
             background: var(--primary);
             color: white;
             text-align: center;
             padding: 25px 15px;
-            margin-top: 50px;
+            margin-top: 30px;
             font-size: 0.8rem;
             border-top: 4px solid var(--accent);
         }
@@ -413,29 +530,37 @@
 </head>
 <body>
 
+    <!-- 1. HEADER (2 COLUMN MINIMALIST STYLE) -->
     <header>
-        <h1>TechVerdicts</h1>
-        <p>Independent, data-driven security software reviews by industry experts.</p>
+        <div class="header-container">
+            <h1>TechVerdicts</h1>
+            <p>Independent, data-driven security software<br>reviews by industry experts.</p>
+        </div>
     </header>
 
     <!-- Navigation Jump Links (Popunder Friendly) -->
     <nav class="jump-nav">
-        <a href="#nordvpn" class="jump-btn">🛡️ Best Overall</a>
-        <a href="#protonvpn" class="jump-btn">👁️ Max Privacy</a>
-        <a href="#purevpn" class="jump-btn">💰 Best Value</a>
+        <a href="#comparison-table" class="jump-btn">🛡️ Best Overall</a>
         <a href="#more-vpns" class="jump-btn">📂 See All 10</a>
     </nav>
 
     <div class="container">
         
+        <!-- 2. MAIN DISCUSSION HEADLINE AREA (GAYA PORTAL GERGASI) -->
+        <div class="main-discussion-area">
+            <!-- TUKAR H1 DAN P DI BAWAH INI SAHAJA IKUT KATEGORI KEMPEN KAU -->
+            <h1 class="main-discussion-title" id="comparison-table">Which Premium Cyber Shield Can You Actually Trust?</h1>
+            <p class="main-discussion-desc">We independently tested and analyzed the top 10 encryption suites for speed, privacy stability, and real-world performance. Here is the unbiased verdict.</p>
+        </div>
+        
         <!-- Popunder-optimized Warning Banner -->
         <div class="warning-banner">
-            <strong>Security Alert:</strong> Unprotected internet activity is visible to your ISP and network snoops. If you are looking for the <strong>fastest VPN for secure streaming and torrenting</strong>, encrypt your browsing and secure your connection with an audited VPN provider below.
+            <strong>Security Alert:</strong> Unprotected internet activity is visible to your ISP and network snoops. If you are looking for the fastest protection to secure streaming, downloads, or block malicious hidden tracking scripts, lock down your connection with an audited VPN provider below.
         </div>
 
         <h2 class="verdict-title">Editor's Choice: Top 3 Recommendations</h2>
         
-        <!-- Verdict Box (Top 3) -->
+        <!-- Verdict Box (Top 3 Comparison Layout) -->
         <div class="verdict-grid">
             <!-- Rank 1: NordVPN -->
             <div class="verdict-card featured">
@@ -445,7 +570,10 @@
                     <div class="card-name">NordVPN</div>
                     <div class="card-verdict">Unmatched speeds, robust threat protection, and flawless audit history.</div>
                 </div>
-                <a href="LINK_NORD_MYLEAD" class="btn-cta" target="_blank" rel="noopener">Get NordVPN Deal</a>
+                <div>
+                    <a href="LINK_NORD_MYLEAD" class="btn-cta" target="_blank" rel="noopener">Get NordVPN Deal</a>
+                    <button class="btn-review-trigger" onclick="toggleReview('nordvpn-review')">Read Deep-Dive Review</button>
+                </div>
             </div>
 
             <!-- Rank 2: Proton VPN -->
@@ -455,7 +583,10 @@
                     <div class="card-name">Proton VPN</div>
                     <div class="card-verdict">Swiss-based ironclad privacy with a transparent open-source model.</div>
                 </div>
-                <a href="LINK_PROTON_MYLEAD" class="btn-cta" target="_blank" rel="noopener">Get Proton VPN</a>
+                <div>
+                    <a href="LINK_PROTON_MYLEAD" class="btn-cta" target="_blank" rel="noopener">Get Proton VPN</a>
+                    <button class="btn-review-trigger" onclick="toggleReview('protonvpn-review')">Read Deep-Dive Review</button>
+                </div>
             </div>
 
             <!-- Rank 3: PureVPN -->
@@ -465,112 +596,121 @@
                     <div class="card-name">PureVPN</div>
                     <div class="card-verdict">Excellent feature-rich package at an incredibly affordable price.</div>
                 </div>
-                <a href="LINK_PURE_MYLEAD" class="btn-cta" target="_blank" rel="noopener">Get PureVPN Deal</a>
+                <div>
+                    <a href="LINK_PURE_MYLEAD" class="btn-cta" target="_blank" rel="noopener">Get PureVPN Deal</a>
+                    <button class="btn-review-trigger" onclick="toggleReview('purevpn-review')">Read Deep-Dive Review</button>
+                </div>
             </div>
         </div>
 
-        <h2 class="section-title">Deep-Dive Reviews: The Top 3</h2>
+        <!-- 4. DYNAMIC DEEP-DIVE REVIEWS CONTAINER (INLINE INJECTION HOUSING) -->
+        <div class="deep-dive-container" id="reviews-display-area">
+            
+            <!-- Detailed Review 1: NordVPN -->
+            <div class="vpn-item" id="nordvpn-review">
+                <button class="btn-close-review" onclick="closeReview('nordvpn-review')">← Close & Go Back</button>
+                <div class="vpn-header">
+                    <div class="vpn-name-area">
+                        <span class="vpn-number">1</span>
+                        <span class="vpn-name">NordVPN Full Review</span>
+                    </div>
+                    <div class="score-box">
+                        <div class="score-val">9.8/10</div>
+                        <div class="score-label">Excellent</div>
+                    </div>
+                </div>
+                <div class="vpn-summary">
+                    NordVPN remains our highest-rated provider and is widely regarded as the best choice to defeat background monitoring systems. Powered by its custom NordLynx protocol, it offers blazing-fast speeds without compromising security. Features include Threat Protection to automatically stop aggressive pop-ups, block hidden video ads, and clear away malicious background web scripts before they eat your mobile data.
+                </div>
+                <div class="pros-cons">
+                    <div class="pc-box pros">
+                        <div class="pc-title">What We Like</div>
+                        <ul>
+                            <li>Lightning-fast connection speeds</li>
+                            <li>Built-in automatic ad & malware script protection</li>
+                            <li>Consistently bypasses heavy network blocks</li>
+                        </ul>
+                    </div>
+                    <div class="pc-box cons">
+                        <div class="pc-title">What to Consider</div>
+                        <ul>
+                            <li>Renewal prices increase after initial sign-up term</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="LINK_NORD_MYLEAD" class="inline-cta" target="_blank" rel="noopener">Claim NordVPN Discount Now</a>
+            </div>
 
-        <!-- Detailed Review 1: NordVPN -->
-        <div class="vpn-item" id="nordvpn">
-            <div class="vpn-header">
-                <div class="vpn-name-area">
-                    <span class="vpn-number">1</span>
-                    <span class="vpn-name">NordVPN</span>
+            <!-- Detailed Review 2: Proton VPN -->
+            <div class="vpn-item" id="protonvpn-review">
+                <button class="btn-close-review" onclick="closeReview('protonvpn-review')">← Close & Go Back</button>
+                <div class="vpn-header">
+                    <div class="vpn-name-area">
+                        <span class="vpn-number">2</span>
+                        <span class="vpn-name">Proton VPN Full Review</span>
+                    </div>
+                    <div class="score-box">
+                        <div class="score-val">9.6/10</div>
+                        <div class="score-label">Excellent</div>
+                    </div>
                 </div>
-                <div class="score-box">
-                    <div class="score-val">9.8/10</div>
-                    <div class="score-label">Excellent</div>
+                <div class="vpn-summary">
+                    Operating under Switzerland's strict privacy laws, Proton VPN is a highly recommended secure Swiss VPN built by renowned scientists. It stands out by making all of its client applications fully open-source and independently audited, providing unmatched security transparency. It actively strips out dynamic tracking scripts on websites to prevent data harvesting.
                 </div>
+                <div class="pros-cons">
+                    <div class="pc-box pros">
+                        <div class="pc-title">What We Like</div>
+                        <ul>
+                            <li>Swiss jurisdiction (out of 5/9/14 Eyes surveillance reach)</li>
+                            <li>Fully open-source and public-audited applications</li>
+                            <li>Secure Core multi-hop architecture</li>
+                        </ul>
+                    </div>
+                    <div class="pc-box cons">
+                        <div class="pc-title">What to Consider</div>
+                        <ul>
+                            <li>Premium plans are slightly pricier</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="LINK_PROTON_MYLEAD" class="inline-cta" target="_blank" rel="noopener">Claim Proton VPN Discount Now</a>
             </div>
-            <div class="vpn-summary">
-                NordVPN remains our highest-rated provider and is widely regarded as the <strong>best VPN with no-logs audit 2026</strong> protocols. Powered by its custom NordLynx protocol, it offers blazing-fast speeds without compromising security. Features include Threat Protection (ad and malware blocker), Double VPN routing, and a strict audited no-logs policy.
-            </div>
-            <div class="pros-cons">
-                <div class="pc-box pros">
-                    <div class="pc-title">What We Like</div>
-                    <ul>
-                        <li>Lightning-fast connection speeds</li>
-                        <li>Built-in ad & malware protection</li>
-                        <li>Consistently bypasses heavy geo-blocks</li>
-                    </ul>
-                </div>
-                <div class="pc-box cons">
-                    <div class="pc-title">What to Consider</div>
-                    <ul>
-                        <li>Renewal prices increase after initial sign-up term</li>
-                    </ul>
-                </div>
-            </div>
-            <a href="LINK_NORD_MYLEAD" class="inline-cta" target="_blank" rel="noopener">Claim NordVPN Discount Now</a>
-        </div>
 
-        <!-- Detailed Review 2: Proton VPN -->
-        <div class="vpn-item" id="protonvpn">
-            <div class="vpn-header">
-                <div class="vpn-name-area">
-                    <span class="vpn-number">2</span>
-                    <span class="vpn-name">Proton VPN</span>
+            <!-- Detailed Review 3: PureVPN -->
+            <div class="vpn-item" id="purevpn-review">
+                <button class="btn-close-review" onclick="closeReview('purevpn-review')">← Close & Go Back</button>
+                <div class="vpn-header">
+                    <div class="vpn-name-area">
+                        <span class="vpn-number">3</span>
+                        <span class="vpn-name">PureVPN Full Review</span>
+                    </div>
+                    <div class="score-box">
+                        <div class="score-val">9.4/10</div>
+                        <div class="score-label">Very Good</div>
+                    </div>
                 </div>
-                <div class="score-box">
-                    <div class="score-val">9.6/10</div>
-                    <div class="score-label">Excellent</div>
+                <div class="vpn-summary">
+                    For users seeking robust protection at an affordable price, PureVPN offers an impressive suite of features. With a globally distributed network of over 6,000 servers, it supports wire-speed protocols, robust encryption standards, and a verified always-on audit model. It blocks typical browser hijackers and disruptive ad scripts to ensure clean, low-latency data consumption.
                 </div>
+                <div class="pros-cons">
+                    <div class="pc-box pros">
+                        <div class="pc-title">What We Like</div>
+                        <ul>
+                            <li>Very competitive budget pricing structures</li>
+                            <li>Impressive server footprint worldwide</li>
+                            <li>Verified "Always-On" no-logs audit structure</li>
+                        </ul>
+                    </div>
+                    <div class="pc-box cons">
+                        <div class="pc-title">What to Consider</div>
+                        <ul>
+                            <li>Desktop app can occasionally take extra time to connect</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="LINK_PURE_MYLEAD" class="inline-cta" target="_blank" rel="noopener">Claim PureVPN Discount Now</a>
             </div>
-            <div class="vpn-summary">
-                Operating under Switzerland's strict privacy laws, Proton VPN is a highly recommended <strong>secure Swiss VPN with open source apps</strong> built by the same renowned scientists behind ProtonMail. It stands out by making all of its client applications fully open-source and independently audited, providing unmatched security transparency.
-            </div>
-            <div class="pros-cons">
-                <div class="pc-box pros">
-                    <div class="pc-title">What We Like</div>
-                    <ul>
-                        <li>Swiss jurisdiction (out of 5/9/14 Eyes reach)</li>
-                        <li>Fully open-source and public-audited apps</li>
-                        <li>Secure Core multi-hop architecture</li>
-                    </ul>
-                </div>
-                <div class="pc-box cons">
-                    <div class="pc-title">What to Consider</div>
-                    <ul>
-                        <li>Premium plans are slightly pricier</li>
-                    </ul>
-                </div>
-            </div>
-            <a href="LINK_PROTON_MYLEAD" class="inline-cta" target="_blank" rel="noopener">Claim Proton VPN Discount Now</a>
-        </div>
 
-        <!-- Detailed Review 3: PureVPN -->
-        <div class="vpn-item" id="purevpn">
-            <div class="vpn-header">
-                <div class="vpn-name-area">
-                    <span class="vpn-number">3</span>
-                    <span class="vpn-name">PureVPN</span>
-                </div>
-                <div class="score-box">
-                    <div class="score-val">9.4/10</div>
-                    <div class="score-label">Very Good</div>
-                </div>
-            </div>
-            <div class="vpn-summary">
-                For users seeking the <strong>best budget friendly VPN with lifetime plans</strong> or cheap multi-year options, PureVPN offers an impressive suite of features. With a globally distributed network of over 6,000 servers, it supports wire-speed protocols, robust encryption standards, and a verified always-on audit model for peace of mind.
-            </div>
-            <div class="pros-cons">
-                <div class="pc-box pros">
-                    <div class="pc-title">What We Like</div>
-                    <ul>
-                        <li>Very competitive pricing structures</li>
-                        <li>Impressive server footprint worldwide</li>
-                        <li>Verified "Always-On" no-logs audit structure</li>
-                    </ul>
-                </div>
-                <div class="pc-box cons">
-                    <div class="pc-title">What to Consider</div>
-                    <ul>
-                        <li>Desktop app can occasionally take extra time to connect</li>
-                    </ul>
-                </div>
-            </div>
-            <a href="LINK_PURE_MYLEAD" class="inline-cta" target="_blank" rel="noopener">Claim PureVPN Discount Now</a>
         </div>
 
         <h2 class="section-title" id="more-vpns">Other Strong Contenders (Ranks 4-10)</h2>
@@ -644,6 +784,12 @@
 
         </div>
 
+        <!-- 5. FREE CTA BOOKMARK BANNER -->
+        <div class="bookmark-cta">
+            <p>🎁 Save This Page for Later!</p>
+            <span>Press <strong>Ctrl + D</strong> or tap the <strong>⭐ icon</strong> in Chrome to bookmark and instantly track the best verified 2026 cyber deals.</span>
+        </div>
+
     </div>
 
     <footer>
@@ -652,15 +798,40 @@
     </footer>
 
     <script>
-        // Smooth toggle effect for the accordion items
+        // Smooth toggle effect for the accordion items (Ranks 4-10)
         const accordionHeaders = document.querySelectorAll('.accordion-header');
-        
         accordionHeaders.forEach(header => {
             header.addEventListener('click', () => {
                 const item = header.parentElement;
                 item.classList.toggle('active');
             });
         });
+
+        // Smart Inline Logic for Top 3 Reviews (Open, Auto-Scroll, & Close)
+        function toggleReview(reviewId) {
+            // Hide all active top 3 reviews first to prevent layout chaos
+            const allReviews = document.querySelectorAll('.deep-dive-container .vpn-item');
+            allReviews.forEach(review => {
+                if(review.id !== reviewId) {
+                    review.style.display = 'none';
+                }
+            });
+
+            const targetReview = document.getElementById(reviewId);
+            if (targetReview.style.display === 'block') {
+                targetReview.style.display = 'none';
+            } else {
+                targetReview.style.display = 'block';
+                // Smooth scroll to focus on the newly opened review box
+                targetReview.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function closeReview(reviewId) {
+            document.getElementById(reviewId).style.display = 'none';
+            // Smooth scroll back up to the comparison matrix area
+            document.getElementById('comparison-table').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     </script>
 </body>
 </html>

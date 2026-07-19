@@ -28,7 +28,7 @@
             line-height: 1.6;
         }
 
-        /* HEADER INLINE STAYS FIXED */
+        /* FIXED INLINE HEADER */
         header {
             background-color: var(--primary);
             color: white;
@@ -64,30 +64,29 @@
             word-break: break-word;
         }
 
-        /* OPTIMIZED: MOBILE NAVIGATION FIXED IN ONE LINE (HORIZONTAL SCROLL) */
+        /* 1. PERBETULAN TOTAL: ZERO WASTED SPACE NAV (BETUL-BETUL RAPAT MUAT OVAL BUTTON) */
         .jump-nav {
             background: white;
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 100;
-            padding: 10px 15px;
+            padding: 4px 10px; /* Padding paling minimum untuk muat button */
+            margin-bottom: 0;  /* Buang jarak bawah */
             display: flex;
             justify-content: flex-start;
             gap: 8px;
-            flex-wrap: nowrap; /* Strictly force single row */
-            overflow-x: auto; /* Enable horizontal swipe */
+            flex-wrap: nowrap;
+            overflow-x: auto;
             -webkit-overflow-scrolling: touch;
         }
 
-        /* Center nav content only on desktop screens */
         @media (min-width: 600px) {
             .jump-nav {
                 justify-content: center;
             }
         }
 
-        /* Hide ugly scrollbar tracks for mobile swipe experience */
         .jump-nav::-webkit-scrollbar {
             display: none;
         }
@@ -99,14 +98,14 @@
         .jump-btn {
             background: var(--light);
             border: 1px solid var(--border);
-            padding: 8px 14px;
+            padding: 6px 12px;
             border-radius: 20px;
             text-decoration: none;
             color: var(--dark);
             font-size: 0.78rem;
             font-weight: 700;
             transition: all 0.2s ease;
-            white-space: nowrap; /* Prevent text wrapping inside buttons */
+            white-space: nowrap;
         }
 
         .jump-btn:hover {
@@ -117,15 +116,16 @@
 
         .container {
             max-width: 800px;
-            margin: 20px auto;
-            padding: 0 15px;
+            margin: 0 auto; /* Diubah dari 20px auto untuk merapatkan dengan nav */
+            padding: 15px 15px;
         }
 
-        /* OPTIMIZED: NO WHITE BACKGROUND, MATCHES MAIN LIGHT BG */
+        /* MAIN DISCUSSION AREA - RAPAT DENGAN JUMP NAV */
         .main-discussion-area {
             text-align: left;
+            margin-top: 5px; /* Jarak minimal dengan butang navigasi */
             margin-bottom: 20px;
-            padding: 10px 0; /* Minimal padding */
+            padding: 0;
         }
 
         .main-discussion-title {
@@ -163,18 +163,40 @@
             font-weight: 700;
         }
 
-        /* OPTIMIZED: 3-COLUMN DESKTOP GRID STAYS PERMANENTLY FIXED */
+        /* 3-COLUMN DESKTOP UNIFIED GRID */
         .verdict-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 15px;
-            margin-bottom: 15px;
-            position: relative;
+            margin-bottom: 25px;
         }
 
         @media (min-width: 600px) {
             .verdict-grid {
                 grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .verdict-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        @media (min-width: 600px) {
+            .verdict-wrapper.open-review {
+                grid-column: 1 / -1;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+            }
+            
+            .verdict-wrapper.open-review#wrapper-nord .verdict-card { grid-column: 1; }
+            .verdict-wrapper.open-review#wrapper-proton .verdict-card { grid-column: 2; }
+            .verdict-wrapper.open-review#wrapper-pure .verdict-card { grid-column: 3; }
+            
+            .verdict-wrapper.open-review .inline-review-panel {
+                grid-column: 1 / -1;
             }
         }
 
@@ -189,7 +211,21 @@
             justify-content: space-between;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             transition: transform 0.2s;
+            height: 100%;
             position: relative;
+        }
+
+        .verdict-wrapper.open-review .verdict-card {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom: none;
+            box-shadow: none;
+        }
+
+        @media (min-width: 600px) {
+            .verdict-wrapper.open-review#wrapper-nord .verdict-card { border: 2px solid var(--secondary); border-bottom: none; }
+            .verdict-wrapper.open-review#wrapper-proton .verdict-card { border: 2px solid var(--secondary); border-bottom: none; }
+            .verdict-wrapper.open-review#wrapper-pure .verdict-card { border: 2px solid var(--secondary); border-bottom: none; }
         }
 
         .verdict-card.featured {
@@ -268,22 +304,28 @@
             color: var(--primary);
         }
 
-        /* OPTIMIZED: HOUSING SEPARATED FROM THE GRID FOR CLEAN 100% WIDTH DISPLAY BELOW MATRIX */
-        .deep-dive-container {
-            margin-bottom: 25px;
-            width: 100%;
-        }
-
+        /* PHYSICALLY UNIFIED REVIEW PANEL */
         .inline-review-panel {
             background: white;
-            border: 2px solid var(--secondary);
+            border: 2px solid var(--border);
             border-radius: 12px;
             padding: 20px;
-            margin-top: 5px;
-            box-shadow: 0 10px 15px -3px rgba(30, 64, 175, 0.1);
             display: none;
             text-align: left;
             width: 100%;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .verdict-wrapper.open-review .inline-review-panel {
+            border: 2px solid var(--secondary);
+            border-top-left-radius: 0;
+            border-radius: 12px;
+        }
+
+        @media (min-width: 600px) {
+            .verdict-wrapper.open-review#wrapper-nord .inline-review-panel { border-top-left-radius: 0; }
+            .verdict-wrapper.open-review#wrapper-proton .inline-review-panel { border-top-left-radius: 12px; }
+            .verdict-wrapper.open-review#wrapper-pure .inline-review-panel { border-top-right-radius: 0; }
         }
 
         .vpn-header {
@@ -405,7 +447,6 @@
             margin-bottom: 15px;
         }
 
-        /* CHANGED: POSITIONED STRICTLY AT BOTTOM AND RENAMED TO CLOSE TAB */
         .btn-close-tab {
             background: #64748b;
             color: white;
@@ -532,17 +573,17 @@
         </div>
     </header>
 
-    <!-- FIXED ROWS ON MOBILE (HORIZONTAL SWIPE) -->
+    <!-- FIXED NAV: MERAPAT HINGGA OVAL SHAPE BUTTON -->
     <nav class="jump-nav">
         <a href="#main-matrix" class="jump-btn">🛡️ Best Overall</a>
-        <a href="#main-matrix" class="jump-btn" onclick="openReviewDirectly('proton-inline-review')">👁️ Max Privacy</a>
-        <a href="#main-matrix" class="jump-btn" onclick="openReviewDirectly('pure-inline-review')">💰 Best Value</a>
+        <a href="#main-matrix" class="jump-btn" onclick="openReviewDirectly('wrapper-proton', 'proton-inline-review')">👁️ Max Privacy</a>
+        <a href="#main-matrix" class="jump-btn" onclick="openReviewDirectly('wrapper-pure', 'pure-inline-review')">💰 Best Value</a>
         <a href="#more-vpns" class="jump-btn">📂 See All 10</a>
     </nav>
 
     <div class="container">
         
-        <!-- MAIN DISCUSSION AREA (MATCHES OVERALL LIGHT BG NO BOX) -->
+        <!-- MAIN DISCUSSION AREA -->
         <div class="main-discussion-area" id="main-matrix">
             <h1 class="main-discussion-title">Which Premium Cyber Shield Can You Actually Trust?</h1>
             <p class="main-discussion-desc">We independently tested and analyzed the top 10 encryption suites for speed, privacy stability, and real-world performance. Here is the unbiased verdict.</p>
@@ -555,157 +596,155 @@
 
         <h2 class="verdict-title">Editor's Choice: Top 3 Recommendations</h2>
         
-        <!-- PERMANENT 3 COLUMN DESKTOP MATRIX GRID -->
+        <!-- PHYSICAL UNIFICATION MATRIX GRID LAYOUT -->
         <div class="verdict-grid">
             
-            <!-- Card Rank 1: NordVPN -->
-            <div class="verdict-card featured" id="card-nord">
+            <!-- Wrapper Rank 1: NordVPN -->
+            <div class="verdict-wrapper" id="wrapper-nord">
                 <span class="badge">Highly Recommended</span>
-                <div>
-                    <div class="card-rank">#1</div>
-                    <div class="card-name">NordVPN</div>
-                    <div class="card-verdict">Unmatched speeds, robust threat protection, and flawless audit history.</div>
+                <div class="verdict-card featured">
+                    <div>
+                        <div class="card-rank">#1</div>
+                        <div class="card-name">NordVPN</div>
+                        <div class="card-verdict">Unmatched speeds, robust threat protection, and flawless audit history.</div>
+                    </div>
+                    <div>
+                        <a href="LINK_NORD_MYLEAD" class="btn-cta" target="_blank" rel="noopener">Get NordVPN Deal</a>
+                        <button class="btn-review-trigger" onclick="toggleUnifiedReview('wrapper-nord', 'nord-inline-review')">Read Deep-Dive Review</button>
+                    </div>
                 </div>
-                <div>
-                    <a href="LINK_NORD_MYLEAD" class="btn-cta" target="_blank" rel="noopener">Get NordVPN Deal</a>
-                    <button class="btn-review-trigger" onclick="toggleInlineReview('nord-inline-review', 'card-nord')">Read Deep-Dive Review</button>
+                <!-- Physically Unified Inline Panel -->
+                <div class="inline-review-panel" id="nord-inline-review">
+                    <div class="vpn-header">
+                        <div class="vpn-name-area">
+                            <span class="vpn-number">1</span>
+                            <span class="vpn-name">NordVPN Review</span>
+                        </div>
+                        <div class="score-box">
+                            <div class="score-val">9.8/10</div>
+                            <div class="score-label">Excellent</div>
+                        </div>
+                    </div>
+                    <div class="vpn-summary">
+                        NordVPN remains our highest-rated provider and is widely regarded as the best choice to defeat background monitoring systems. Powered by its custom NordLynx protocol, it offers blazing-fast speeds without compromising security. Features include Threat Protection to automatically stop aggressive pop-ups, block hidden video ads, and clear away malicious background web scripts before they eat your mobile data.
+                    </div>
+                    <div class="pros-cons">
+                        <div class="pc-box pros">
+                            <div class="pc-title">What We Like</div>
+                            <ul>
+                                <li>Lightning-fast connection speeds</li>
+                                <li>Built-in automatic ad & malware script protection</li>
+                                <li>Consistently bypasses heavy network blocks</li>
+                            </ul>
+                        </div>
+                        <div class="pc-box cons">
+                            <div class="pc-title">What to Consider</div>
+                            <ul>
+                                <li>Renewal prices increase after initial sign-up term</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="LINK_NORD_MYLEAD" class="inline-cta" target="_blank" rel="noopener">Claim NordVPN Discount Now</a>
+                    <button class="btn-close-tab" onclick="closeUnifiedReview('wrapper-nord', 'nord-inline-review')">Close Tab</button>
                 </div>
             </div>
 
-            <!-- Card Rank 2: Proton VPN -->
-            <div class="verdict-card" id="card-proton">
-                <div>
-                    <div class="card-rank">#2</div>
-                    <div class="card-name">Proton VPN</div>
-                    <div class="card-verdict">Swiss-based ironclad privacy with a transparent open-source model.</div>
+            <!-- Wrapper Rank 2: Proton VPN -->
+            <div class="verdict-wrapper" id="wrapper-proton">
+                <div class="verdict-card">
+                    <div>
+                        <div class="card-rank">#2</div>
+                        <div class="card-name">Proton VPN</div>
+                        <div class="card-verdict">Swiss-based ironclad privacy with a transparent open-source model.</div>
+                    </div>
+                    <div>
+                        <a href="LINK_PROTON_MYLEAD" class="btn-cta" target="_blank" rel="noopener">Get Proton VPN</a>
+                        <button class="btn-review-trigger" onclick="toggleUnifiedReview('wrapper-proton', 'proton-inline-review')">Read Deep-Dive Review</button>
+                    </div>
                 </div>
-                <div>
-                    <a href="LINK_PROTON_MYLEAD" class="btn-cta" target="_blank" rel="noopener">Get Proton VPN</a>
-                    <button class="btn-review-trigger" onclick="toggleInlineReview('proton-inline-review', 'card-proton')">Read Deep-Dive Review</button>
+                <!-- Physically Unified Inline Panel -->
+                <div class="inline-review-panel" id="proton-inline-review">
+                    <div class="vpn-header">
+                        <div class="vpn-name-area">
+                            <span class="vpn-number">2</span>
+                            <span class="vpn-name">Proton VPN Review</span>
+                        </div>
+                        <div class="score-box">
+                            <div class="score-val">9.6/10</div>
+                            <div class="score-label">Excellent</div>
+                        </div>
+                    </div>
+                    <div class="vpn-summary">
+                        Operating under Switzerland's strict privacy laws, Proton VPN is a highly recommended secure Swiss VPN built by renowned scientists. It stands out by making all of its client applications fully open-source and independently audited, providing unmatched security transparency. It actively strips out dynamic tracking scripts on websites to prevent data harvesting.
+                    </div>
+                    <div class="pros-cons">
+                        <div class="pc-box pros">
+                            <div class="pc-title">What We Like</div>
+                            <ul>
+                                <li>Swiss jurisdiction (out of 5/9/14 Eyes surveillance reach)</li>
+                                <li>Fully open-source and public-audited applications</li>
+                                <li>Secure Core multi-hop architecture</li>
+                            </ul>
+                        </div>
+                        <div class="pc-box cons">
+                            <div class="pc-title">What to Consider</div>
+                            <ul>
+                                <li>Premium plans are slightly pricier</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="LINK_PROTON_MYLEAD" class="inline-cta" target="_blank" rel="noopener">Claim Proton VPN Discount Now</a>
+                    <button class="btn-close-tab" onclick="closeUnifiedReview('wrapper-proton', 'proton-inline-review')">Close Tab</button>
                 </div>
             </div>
 
-            <!-- Card Rank 3: PureVPN -->
-            <div class="verdict-card" id="card-pure">
-                <div>
-                    <div class="card-rank">#3</div>
-                    <div class="card-name">PureVPN</div>
-                    <div class="card-verdict">Excellent feature-rich package at an incredibly affordable price.</div>
-                </div>
-                <div>
-                    <a href="LINK_PURE_MYLEAD" class="btn-cta" target="_blank" rel="noopener">Get PureVPN Deal</a>
-                    <button class="btn-review-trigger" onclick="toggleInlineReview('pure-inline-review', 'card-pure')">Read Deep-Dive Review</button>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- HOUSING HOISTED DIRECTLY BELOW THE MATRIX GRID FOR 100% WIDTH FLEXIBILITY -->
-        <div class="deep-dive-container">
-            
-            <!-- Inline Review Panel 1: NordVPN -->
-            <div class="inline-review-panel" id="nord-inline-review">
-                <div class="vpn-header">
-                    <div class="vpn-name-area">
-                        <span class="vpn-number">1</span>
-                        <span class="vpn-name">NordVPN Review</span>
+            <!-- Wrapper Rank 3: PureVPN -->
+            <div class="verdict-wrapper" id="wrapper-pure">
+                <div class="verdict-card">
+                    <div>
+                        <div class="card-rank">#3</div>
+                        <div class="card-name">PureVPN</div>
+                        <div class="card-verdict">Excellent feature-rich package at an incredibly affordable price.</div>
                     </div>
-                    <div class="score-box">
-                        <div class="score-val">9.8/10</div>
-                        <div class="score-label">Excellent</div>
+                    <div>
+                        <a href="LINK_PURE_MYLEAD" class="btn-cta" target="_blank" rel="noopener">Get PureVPN Deal</a>
+                        <button class="btn-review-trigger" onclick="toggleUnifiedReview('wrapper-pure', 'pure-inline-review')">Read Deep-Dive Review</button>
                     </div>
                 </div>
-                <div class="vpn-summary">
-                    NordVPN remains our highest-rated provider and is widely regarded as the best choice to defeat background monitoring systems. Powered by its custom NordLynx protocol, it offers blazing-fast speeds without compromising security. Features include Threat Protection to automatically stop aggressive pop-ups, block hidden video ads, and clear away malicious background web scripts before they eat your mobile data.
+                <!-- Physically Unified Inline Panel -->
+                <div class="inline-review-panel" id="pure-inline-review">
+                    <div class="vpn-header">
+                        <div class="vpn-name-area">
+                            <span class="vpn-number">3</span>
+                            <span class="vpn-name">PureVPN Review</span>
+                        </div>
+                        <div class="score-box">
+                            <div class="score-val">9.4/10</div>
+                            <div class="score-label">Very Good</div>
+                        </div>
+                    </div>
+                    <div class="vpn-summary">
+                        For users seeking robust protection at an affordable price, PureVPN offers an impressive suite of features. With a globally distributed network of over 6,000 servers, it supports wire-speed protocols, robust encryption standards, and a verified always-on audit model. It blocks typical browser hijackers and disruptive ad scripts to ensure clean, low-latency data consumption.
+                    </div>
+                    <div class="pros-cons">
+                        <div class="pc-box pros">
+                            <div class="pc-title">What We Like</div>
+                            <ul>
+                                <li>Very competitive budget pricing structures</li>
+                                <li>Impressive server footprint worldwide</li>
+                                <li>Verified "Always-On" no-logs audit structure</li>
+                            </ul>
+                        </div>
+                        <div class="pc-box cons">
+                            <div class="pc-title">What to Consider</div>
+                            <ul>
+                                <li>Desktop app can occasionally take extra time to connect</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="LINK_PURE_MYLEAD" class="inline-cta" target="_blank" rel="noopener">Claim PureVPN Discount Now</a>
+                    <button class="btn-close-tab" onclick="closeUnifiedReview('wrapper-pure', 'pure-inline-review')">Close Tab</button>
                 </div>
-                <div class="pros-cons">
-                    <div class="pc-box pros">
-                        <div class="pc-title">What We Like</div>
-                        <ul>
-                            <li>Lightning-fast connection speeds</li>
-                            <li>Built-in automatic ad & malware script protection</li>
-                            <li>Consistently bypasses heavy network blocks</li>
-                        </ul>
-                    </div>
-                    <div class="pc-box cons">
-                        <div class="pc-title">What to Consider</div>
-                        <ul>
-                            <li>Renewal prices increase after initial sign-up term</li>
-                        </ul>
-                    </div>
-                </div>
-                <a href="LINK_NORD_MYLEAD" class="inline-cta" target="_blank" rel="noopener">Claim NordVPN Discount Now</a>
-                <button class="btn-close-tab" onclick="closeInlineReview('nord-inline-review', 'card-nord')">Close Tab</button>
-            </div>
-
-            <!-- Inline Review Panel 2: Proton VPN -->
-            <div class="inline-review-panel" id="proton-inline-review">
-                <div class="vpn-header">
-                    <div class="vpn-name-area">
-                        <span class="vpn-number">2</span>
-                        <span class="vpn-name">Proton VPN Review</span>
-                    </div>
-                    <div class="score-box">
-                        <div class="score-val">9.6/10</div>
-                        <div class="score-label">Excellent</div>
-                    </div>
-                </div>
-                <div class="vpn-summary">
-                    Operating under Switzerland's strict privacy laws, Proton VPN is a highly recommended secure Swiss VPN built by renowned scientists. It stands out by making all of its client applications fully open-source and independently audited, providing unmatched security transparency. It actively strips out dynamic tracking scripts on websites to prevent data harvesting.
-                </div>
-                <div class="pros-cons">
-                    <div class="pc-box pros">
-                        <div class="pc-title">What We Like</div>
-                        <ul>
-                            <li>Swiss jurisdiction (out of 5/9/14 Eyes surveillance reach)</li>
-                            <li>Fully open-source and public-audited applications</li>
-                            <li>Secure Core multi-hop architecture</li>
-                        </ul>
-                    </div>
-                    <div class="pc-box cons">
-                        <div class="pc-title">What to Consider</div>
-                        <ul>
-                            <li>Premium plans are slightly pricier</li>
-                        </ul>
-                    </div>
-                </div>
-                <a href="LINK_PROTON_MYLEAD" class="inline-cta" target="_blank" rel="noopener">Claim Proton VPN Discount Now</a>
-                <button class="btn-close-tab" onclick="closeInlineReview('proton-inline-review', 'card-proton')">Close Tab</button>
-            </div>
-
-            <!-- Inline Review Panel 3: PureVPN -->
-            <div class="inline-review-panel" id="pure-inline-review">
-                <div class="vpn-header">
-                    <div class="vpn-name-area">
-                        <span class="vpn-number">3</span>
-                        <span class="vpn-name">PureVPN Review</span>
-                    </div>
-                    <div class="score-box">
-                        <div class="score-val">9.4/10</div>
-                        <div class="score-label">Very Good</div>
-                    </div>
-                </div>
-                <div class="vpn-summary">
-                    For users seeking robust protection at an affordable price, PureVPN offers an impressive suite of features. With a globally distributed network of over 6,000 servers, it supports wire-speed protocols, robust encryption standards, and a verified always-on audit model. It blocks typical browser hijackers and disruptive ad scripts to ensure clean, low-latency data consumption.
-                </div>
-                <div class="pros-cons">
-                    <div class="pc-box pros">
-                        <div class="pc-title">What We Like</div>
-                        <ul>
-                            <li>Very competitive budget pricing structures</li>
-                            <li>Impressive server footprint worldwide</li>
-                            <li>Verified "Always-On" no-logs audit structure</li>
-                        </ul>
-                    </div>
-                    <div class="pc-box cons">
-                        <div class="pc-title">What to Consider</div>
-                        <ul>
-                            <li>Desktop app can occasionally take extra time to connect</li>
-                        </ul>
-                    </div>
-                </div>
-                <a href="LINK_PURE_MYLEAD" class="inline-cta" target="_blank" rel="noopener">Claim PureVPN Discount Now</a>
-                <button class="btn-close-tab" onclick="closeInlineReview('pure-inline-review', 'card-pure')">Close Tab</button>
             </div>
 
         </div>
@@ -795,7 +834,7 @@
     </footer>
 
     <script>
-        // Ranks 4-10 Accordion
+        // Ranks 4-10 Accordion Engine
         const accordionHeaders = document.querySelectorAll('.accordion-header');
         accordionHeaders.forEach(header => {
             header.addEventListener('click', () => {
@@ -804,40 +843,39 @@
             });
         });
 
-        // 3-Column Preserving Dropdown Engine
-        function toggleInlineReview(reviewPanelId, cardId) {
-            const panel = document.getElementById(reviewPanelId);
-            const isOpen = panel.style.display === 'block';
+        // Smart Physical Grid Expansion Logic (Zero Jump / Instant Expansion)
+        function toggleUnifiedReview(wrapperId, panelId) {
+            const wrapper = document.getElementById(wrapperId);
+            const panel = document.getElementById(panelId);
             
-            // Close all open panels and reset cards border style
-            document.querySelectorAll('.inline-review-panel').forEach(p => p.style.display = 'none');
-            document.querySelectorAll('.verdict-card').forEach(c => c.style.borderWidth = '2px');
+            const isCurrentlyOpen = wrapper.classList.contains('open-review');
             
-            if (!isOpen) {
-                // Open targeted panel smoothly under the 3 cards matrix
+            // Reset and close all wrappers instantly without jumping screen
+            document.querySelectorAll('.verdict-wrapper').forEach(w => {
+                w.classList.remove('open-review');
+            });
+            document.querySelectorAll('.inline-review-panel').forEach(p => {
+                p.style.display = 'none';
+            });
+            
+            // If the clicked one wasn't open, open it as a unified layout piece
+            if (!isCurrentlyOpen) {
+                wrapper.classList.add('open-review');
                 panel.style.display = 'block';
-                // Highlight active card for tracking focus
-                document.getElementById(cardId).style.borderWidth = '3px';
-                panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
-        function closeInlineReview(reviewPanelId, cardId) {
-            const panel = document.getElementById(reviewPanelId);
+        function closeUnifiedReview(wrapperId, panelId) {
+            const wrapper = document.getElementById(wrapperId);
+            const panel = document.getElementById(panelId);
+            
             panel.style.display = 'none';
-            document.getElementById(cardId).style.borderWidth = '2px';
-            // Scroll right back to focus the matrix top cards grid seamlessly
-            document.getElementById(cardId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            wrapper.classList.remove('open-review');
         }
 
-        // Bridge function for the jump links to launch full tab panels instantly
-        function openReviewDirectly(reviewPanelId) {
-            document.querySelectorAll('.inline-review-panel').forEach(p => p.style.display = 'none');
-            const panel = document.getElementById(reviewPanelId);
-            panel.style.display = 'block';
-            setTimeout(() => {
-                panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 150);
+        // Bridge function for the horizontal nav links to toggle active panels cleanly
+        function openReviewDirectly(wrapperId, panelId) {
+            toggleUnifiedReview(wrapperId, panelId);
         }
     </script>
 </body>

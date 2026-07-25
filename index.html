@@ -76,7 +76,6 @@
             .jump-nav {
                 justify-content: center;
             }
-            /* PERUBAHAN KHAS DESKTOP: Menjadikan header sebaris dan besarkan font description */
             .header-container {
                 align-items: baseline;
             }
@@ -189,7 +188,6 @@
             border-color: var(--accent);
             background: #fffaf0;
         }
-        /* SOLUSI PC BORDER FIX */
         @media (min-width: 600px) {
             .verdict-card.active-review-card {
                 border: 2px solid var(--secondary) !important;
@@ -242,13 +240,20 @@
             padding: 12px;
             border-radius: 8px;
             font-weight: 800;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             box-shadow: 0 2px 4px rgba(22, 163, 74, 0.2);
         }
         .btn-cta:hover {
             background-color: #15803d;
+        }
+        .cta-microcopy {
+            font-size: 0.72rem;
+            color: #6b7280;
+            margin-bottom: 10px;
+            display: block;
+            font-weight: 600;
         }
         .btn-review-trigger {
             background: #f1f5f9;
@@ -265,7 +270,6 @@
             background: #e2e8f0;
             color: var(--primary);
         }
-        /* TRUE UNIFIED REVIEW HOUSING */
         .inline-review-panel {
             background: white;
             border: 2px solid var(--secondary);
@@ -279,7 +283,6 @@
         .inline-review-panel.open-panel {
             display: block;
         }
-        /* REKA BENTUK MOBILE KHAS */
         @media (max-width: 599px) {
             .verdict-card.active-review-card {
                 border: 2px solid var(--secondary) !important;
@@ -295,7 +298,6 @@
                 margin-bottom: 15px;
             }
         }
-        /* Desktop Mode Layout Column Spanning */
         @media (min-width: 600px) {
             .inline-review-panel.open-panel {
                 grid-column: 1 / -1;
@@ -394,7 +396,7 @@
             padding-left: 5px;
         }
         .pc-box ul li {
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
         .inline-cta {
             background: var(--success);
@@ -406,7 +408,7 @@
             text-align: center;
             display: block;
             margin-top: 15px;
-            margin-bottom: 15px;
+            margin-bottom: 6px;
         }
         .btn-close-tab {
             background: #64748b;
@@ -421,6 +423,7 @@
             text-align: center;
             display: block;
             transition: background 0.2s;
+            margin-top: 10px;
         }
         .btn-close-tab:hover {
             background: #475569;
@@ -541,21 +544,22 @@
         
         <!-- 3-COLUMN PERMANENT GRID LAYOUT -->
         <div class="verdict-grid">
-            <!-- Block #1: NordVPN -->
+            <!-- Block #1: NordVPN (HYBRID VERSION APPLIED) -->
             <div class="verdict-card featured" id="card-nord">
-                <span class="badge">Highly Recommended</span>
+                <span class="badge">#1 Highly Recommended — Save 70% Today</span>
                 <div>
                     <div class="card-rank">#1</div>
                     <div class="card-name">NordVPN</div>
-                    <div class="card-verdict">Unmatched speeds, robust threat protection, and flawless audit history.</div>
+                    <div class="card-verdict">Fast 4K streaming powered by <strong>NordLynx</strong>, built-in <strong>Threat Protection Pro</strong> against malware, and effortless access to global content.</div>
                 </div>
                 <div>
-                    <a href="LINK_NORD_MYLEAD" class="btn-cta" target="_blank" rel="noopener">Get NordVPN Deal</a>
+                    <a href="LINK_NORD_MYLEAD" class="btn-cta" target="_blank" rel="noopener">Claim NordVPN Deal (Save 70% + 3 Months Free)</a>
+                    <span class="cta-microcopy">🔒 30-Day Money-Back Guarantee — Risk-Free</span>
                     <button class="btn-review-trigger" onclick="toggleUnifiedReview('nord-panel', 'card-nord', 'active-nord')">Read Deep-Dive Review</button>
                 </div>
             </div>
 
-            <!-- Inline Panel 1: NordVPN -->
+            <!-- Inline Panel 1: NordVPN (HYBRID VERSION APPLIED) -->
             <div class="inline-review-panel" id="nord-panel">
                 <div class="vpn-header">
                     <div class="vpn-name-area">
@@ -568,25 +572,28 @@
                     </div>
                 </div>
                 <div class="vpn-summary">
-                    NordVPN remains our highest-rated provider and is widely regarded as the best choice to defeat background monitoring systems. Powered by its custom NordLynx protocol, it offers blazing-fast speeds without compromising security. Features include Threat Protection to automatically stop aggressive pop-ups, block hidden video ads, and clear away malicious background web scripts before they eat your mobile data.
+                    NordVPN remains our highest-rated provider, combining high-grade <strong>AES-256 encryption</strong> with industry-leading speeds. Powered by its custom <strong>NordLynx protocol</strong>, it effortlessly bypasses geo-blocks on Netflix US, Disney+, and live sports channels without buffering. Its built-in <strong>Threat Protection Pro</strong> automatically blocks intrusive ads, tracker cookies, and malicious background scripts, saving your mobile data while keeping your browsing fully private under a <strong>strict, independently-audited No-Logs policy</strong>.
                 </div>
                 <div class="pros-cons">
                     <div class="pc-box pros">
                         <div class="pc-title">What We Like</div>
                         <ul>
-                            <li>Lightning-fast connection speeds</li>
-                            <li>Built-in automatic ad & malware script protection</li>
-                            <li>Consistently bypasses heavy network blocks</li>
+                            <li><strong>Next-Gen NordLynx Protocol:</strong> Delivers ultra-fast connections for lag-free 4K streaming and online gaming.</li>
+                            <li><strong>Bypasses Heavy Geo-Blocks:</strong> Seamlessly unlocks global Netflix libraries, Hulu, BBC iPlayer, and restricted live sports streams.</li>
+                            <li><strong>Threat Protection Pro:</strong> Automatically blocks aggressive pop-up ads, trackers, and malicious scripts before they reach your device.</li>
+                            <li><strong>Audited No-Logs Policy:</strong> Guarantees your browsing activity and IP address are never recorded, tracked, or sold to ISPs.</li>
+                            <li><strong>Multi-Device Support:</strong> Protect up to 10 devices simultaneously, including Android, iOS, Windows, macOS, and Smart TVs.</li>
                         </ul>
                     </div>
                     <div class="pc-box cons">
                         <div class="pc-title">What to Consider</div>
                         <ul>
-                            <li>Renewal prices increase after initial sign-up term</li>
+                            <li><strong>Renewal Rates Increase:</strong> Promotional discounts apply to the initial sign-up term (Tip: Lock in the 2-year plan for maximum long-term savings).</li>
                         </ul>
                     </div>
                 </div>
-                <a href="LINK_NORD_MYLEAD" class="inline-cta" target="_blank" rel="noopener">Claim NordVPN Discount Now</a>
+                <a href="LINK_NORD_MYLEAD" class="inline-cta" target="_blank" rel="noopener">Claim NordVPN Discount Now (Save 70% + 3 Months Free)</a>
+                <span class="cta-microcopy" style="text-align: center;">🔒 30-Day Money-Back Guarantee — Risk-Free</span>
                 <button class="btn-close-tab" onclick="closeUnifiedReview('nord-panel', 'card-nord')">Close Tab</button>
             </div>
 
@@ -792,7 +799,7 @@
                 </div>
             </div>
 
-            <!-- Rank 8: KeepSolid VPN Unlimited — Unique Lifetime Plan Offers -->
+            <!-- Rank 8: KeepSolid VPN Unlimited -->
             <div class="accordion-item">
                 <div class="accordion-header">#8 KeepSolid VPN Unlimited — Unique Lifetime Plan Offers</div>
                 <div class="accordion-content">
